@@ -78,9 +78,6 @@ void logSend(struct req *r) {
 }
 
 void resetTimer(struct req *r) {
-  struct timespec interval;
-  interval.tv_sec = 0;
-  interval.tv_nsec = 0;
   struct timespec value;
   value.tv_sec = 5;
   value.tv_nsec = 0;
@@ -154,9 +151,6 @@ int parseReq(char *buf, char *filename, char *mode) {
   buf = getString(filename, buf);
   getString(mode, buf);
   return opcode;
-}
-
-void rrq(char *filename, char *mode, struct sockaddr_in claddr) {
 }
 
 int main(int argc, char* argv[]) {
