@@ -1,4 +1,4 @@
-all: clean dir bin/udp_select
+all: bin/udp_select
 
 dir:
 	mkdir bin

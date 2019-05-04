@@ -193,9 +193,10 @@ int main(int argc, char* argv[]) {
   FD_SET(sfd, &readfds);
 
   for (;;) {
-    select(nfds, &readfds, NULL, NULL, 0);
+    fd_set readfdsDup = readfds;
+    select(nfds, &readfdsDup, NULL, NULL, 0);
     for (int fd = 0; fd < nfds; fd++) {
-      if (FD_ISSET(fd, &readfds)) {
+      if (FD_ISSET(fd, &readfdsDup)) {
         if (fd == sfd) {
           // new request
 
@@ -261,6 +262,7 @@ int main(int argc, char* argv[]) {
             r -> file_fs = f;
             r -> block_num = 1;
             r -> n_timeout = 0;
+            r -> last = 0;
 
             sendBlock(r);
 
